@@ -14,6 +14,7 @@ var db = require('nano')('http://localhost:5984/my_db')
 app.use(jsonp())
 
 app.use(mount('/users', function *() {
+  this.type = 'json'
   this.body = db.view('koa_example', 'users')
     .pipe(JSONStream.parse('rows.*.value'))
     .pipe(stringify())
