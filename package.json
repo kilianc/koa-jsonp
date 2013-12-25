@@ -28,10 +28,8 @@
     "JSONStream": "~0.7.1",
     "koa": "~0.1.2",
     "request": "~2.30.0",
-    "koa-mount": "~1.2.2"
-  },
-  "dependencies": {
-    "qs": "~0.6.6",
+    "koa-mount": "~1.2.2",
     "json-array-stream": "~0.1.2"
-  }
+  },
+  "dependencies": {}
 }
