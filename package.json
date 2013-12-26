@@ -1,6 +1,6 @@
 {
   "name": "koa-jsonp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "JSONP middleware with GET/POST support for koajs",
   "main": "index.js",
   "scripts": {
