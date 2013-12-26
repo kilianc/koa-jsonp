@@ -60,16 +60,9 @@ The middleware auto selects the right format based on the presence of callback (
 
 ![table](http://f.cl.ly/items/460B2P0h3m3c22000W1p/json-transport-0.1.0.png)
 
-For example:
-
-    GET  http://localhost/1/test/test`              will response in JSON format
-    GET  http://localhost/1/test/test?callback=cb`  will response in JSONP format
-    POST http://localhost/1/test/test`              will response in JSON format
-    POST http://localhost/1/test/test?callback=cb`  will response in JSONP + iFrame format
-
 # JSONP CORS
 
-*This is not required if your frontend and your API runs in the same domain or if you set the `Access-Control-*` headers properly. In this case just use an `XMLHttpRequest` and don't use this middleware at all. Reference: [MDN](https://developer.mozilla.org/en/docs/HTTP/Access_control_CORS) - [HTML5Rocks](http://www.html5rocks.com/en/tutorials/cors/) - [SO](http://stackoverflow.com/questions/13146892/cors-access-control-allow-headers-wildcard-being-ignored)*
+*This is not required if your frontend and your API run in the same domain or if you set the `Access-Control-*` headers properly. In this case just use an `XMLHttpRequest` and don't use this middleware at all. Reference: [MDN](https://developer.mozilla.org/en/docs/HTTP/Access_control_CORS) - [HTML5Rocks](http://www.html5rocks.com/en/tutorials/cors/) - [SO](http://stackoverflow.com/questions/13146892/cors-access-control-allow-headers-wildcard-being-ignored)*
 
 There is a way to read a JSONP response after sending a POST request (form) in the browser. The solution is to set an iframe as target of the form (could be hidden). The iframe will load your response page, in this case plain HTML with a script tag and will call your `callback` using `parent.callbackname(data)`.
 
