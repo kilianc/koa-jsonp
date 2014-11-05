@@ -31,7 +31,7 @@ describe('jsonp()', function () {
   it('shouldn\'t do anything if callback is not provided / GET', function (done) {
     get('http://localhost:3000/buffered', function (err, res, body) {
       assert.equal(body.foo, 'bar')
-      assert.equal(res.headers['content-type'], 'application/json')
+      assert.equal(res.headers['content-type'], 'application/json; charset=utf-8')
       done(err)
     })
   })
@@ -47,7 +47,7 @@ describe('jsonp()', function () {
   it('shouldn\'t do anything if callback is not provided / POST', function (done) {
     post('http://localhost:3000/buffered', function (err, res, body) {
       assert.equal(body.foo, 'bar')
-      assert.equal(res.headers['content-type'], 'application/json')
+      assert.equal(res.headers['content-type'], 'application/json; charset=utf-8')
       done(err)
     })
   })
@@ -56,7 +56,7 @@ describe('jsonp()', function () {
     get('http://localhost:3000/buffered?my_cb_name=cb', function (err, res, body) {
       var data = JSON.parse(body.match(/cb\(([^)]+)\)/m)[1])
       assert.equal(data.foo, 'bar')
-      assert.equal(res.headers['content-type'], 'text/javascript')
+      assert.equal(res.headers['content-type'], 'text/javascript; charset=utf-8')
       done(err)
     })
   })
@@ -75,7 +75,7 @@ describe('jsonp()', function () {
     get('http://localhost:3000/streaming?my_cb_name=cb', function (err, res, body) {
       var data = JSON.parse(body.match(/cb\(([^)]+)\)/m)[1])
       assert.lengthOf(data, 5)
-      assert.equal(res.headers['content-type'], 'text/javascript')
+      assert.equal(res.headers['content-type'], 'text/javascript; charset=utf-8')
       done(err)
     })
   })
