@@ -20,6 +20,9 @@ describe('jsonp()', function () {
     app.use(mount('/buffered', function *() {
       this.body = { foo: 'bar' }
     }))
+    app.use(mount('/null', function *() {
+      this.body = null
+    }))
     app.use(mount('/streaming', function *() {
       this.body = get('http://isaacs.couchone.com/registry/_all_docs?limit=5')
         .pipe(JSONStream.parse('rows.*.value'))
@@ -52,7 +55,22 @@ describe('jsonp()', function () {
     })
   })
 
-  it('should switch to JSONP mode if callback is provided', function (done) {
+  it('shouldn\'t do anything if this.body is undefined', function (done) {
+    get('http://localhost:3000/404?my_cb_name=cb', function (err, res, body) {
+      assert.equal(body, 'Not Found')
+      assert.equal(res.headers['content-type'], 'text/plain; charset=utf-8')
+      done(err)
+    })
+  })
+
+  it('shouldn\'t do anything if this.body is null', function (done) {
+    get('http://localhost:3000/null?my_cb_name=cb', function (err, res, body) {
+      assert.equal(res.statusCode, 204)
+      done(err)
+    })
+  })
+
+  it('should switch to JSONP mode if this.body is defined', function (done) {
     get('http://localhost:3000/buffered?my_cb_name=cb', function (err, res, body) {
       var data = JSON.parse(body.match(/cb\(([^)]+)\)/m)[1])
       assert.equal(data.foo, 'bar')
