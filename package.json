@@ -23,12 +23,12 @@
   },
   "homepage": "https://github.com/kilianc/koa-jsonp",
   "devDependencies": {
-    "JSONStream": "^0.9.0",
-    "chai": "^1.9.2",
+    "JSONStream": "^1.0.7",
+    "chai": "^3.4.1",
     "json-array-stream": "^0.1.2",
-    "koa": "^0.13.0",
-    "koa-mount": "^1.3.0",
-    "mocha": "^2.0.1",
-    "request": "^2.47.0"
+    "koa": "^2.0.0-alpha.3",
+    "koa-mount": "koajs/mount#next",
+    "mocha": "^2.3.4",
+    "request": "^2.67.0"
   }
 }
