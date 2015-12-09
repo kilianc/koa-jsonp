@@ -12,7 +12,8 @@ var assert = require('chai').assert
   , app = require('koa')()
   , mount = require('koa-mount')
   , jsonp = require('../')
-
+  , path = require('path')
+  , fs = require('fs')
 
 describe('jsonp()', function () {
   before(function (done) {
@@ -24,7 +25,7 @@ describe('jsonp()', function () {
       this.body = null
     }))
     app.use(mount('/streaming', function *() {
-      this.body = get('http://isaacs.couchone.com/registry/_all_docs?limit=5')
+      this.body = fs.createReadStream(path.join(__dirname, 'stream.json'))
         .pipe(JSONStream.parse('rows.*.value'))
         .pipe(stringify())
     }))
