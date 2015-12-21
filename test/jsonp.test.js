@@ -9,7 +9,8 @@ var assert = require('chai').assert
   , post = require('request').defaults({ json: true }).post
   , JSONStream = require('JSONStream')
   , stringify = require('json-array-stream')
-  , app = require('koa')()
+  , Koa = require('koa')
+  , app = new Koa()
   , mount = require('koa-mount')
   , jsonp = require('../')
   , path = require('path')
@@ -18,14 +19,14 @@ var assert = require('chai').assert
 describe('jsonp()', function () {
   before(function (done) {
     app.use(jsonp({ callbackName: 'my_cb_name' }))
-    app.use(mount('/buffered', function *() {
-      this.body = { foo: 'bar' }
+    app.use(mount('/buffered', async function (ctx) {
+      ctx.body = { foo: 'bar' }
     }))
-    app.use(mount('/null', function *() {
-      this.body = null
+    app.use(mount('/null', async function (ctx) {
+      ctx.body = null
     }))
-    app.use(mount('/streaming', function *() {
-      this.body = fs.createReadStream(path.join(__dirname, 'stream.json'))
+    app.use(mount('/streaming', async function (ctx) {
+      ctx.body = fs.createReadStream(path.join(__dirname, 'stream.json'))
         .pipe(JSONStream.parse('rows.*.value'))
         .pipe(stringify())
     }))

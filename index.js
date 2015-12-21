@@ -8,4 +8,4 @@
  * Main exports
  */
 
-module.exports = require((process.env.KOA_JSONP_COV ? './lib-cov' : './lib') + '/jsonp')
+module.exports = require((process.env.KOA_JSONP_COV ? './lib-cov' : './dist') + '/jsonp')
