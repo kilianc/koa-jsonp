@@ -1,19 +1,21 @@
-/**
+/*!
  * jsonp.test.js
  * Created by Kilian Ciuffolo on Dec 25, 2013
  * Copyright (c) 2013 Kilian Ciuffolo, me@nailik.org
  */
 
-var assert = require('chai').assert
-  , get = require('request').defaults({ json: true }).get
-  , post = require('request').defaults({ json: true }).post
-  , JSONStream = require('JSONStream')
-  , stringify = require('json-array-stream')
-  , app = require('koa')()
-  , mount = require('koa-mount')
-  , jsonp = require('../')
-  , path = require('path')
-  , fs = require('fs')
+'use strict'
+
+const assert = require('chai').assert
+const get = require('request').defaults({ json: true }).get
+const post = require('request').defaults({ json: true }).post
+const JSONStream = require('JSONStream')
+const stringify = require('json-array-stream')
+const app = require('koa')()
+const mount = require('koa-mount')
+const jsonp = require('../')
+const path = require('path')
+const fs = require('fs')
 
 describe('jsonp()', function () {
   before(function (done) {
@@ -101,7 +103,7 @@ describe('jsonp()', function () {
 
   it('should switch to JSONP+iframe mode if callback is provided / POST / Stream', function (done) {
     post('http://localhost:3000/streaming?my_cb_name=cb', function (err, res, body) {
-      var data = JSON.parse(body.match(/cb\(([^)]+)\)/m)[1])
+      let data = JSON.parse(body.match(/cb\(([^)]+)\)/m)[1])
       assert.lengthOf(data, 5)
       assert.match(body, /<!doctype html>/)
       assert.equal(res.headers['content-type'], 'text/html; charset=utf-8')

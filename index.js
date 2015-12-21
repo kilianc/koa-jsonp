@@ -4,8 +4,4 @@
  * Copyright (c) 2013 Kilian Ciuffolo, me@nailik.org
  */
 
-/**
- * Main exports
- */
-
-module.exports = require((process.env.KOA_JSONP_COV ? './lib-cov' : './lib') + '/jsonp')
+module.exports = require('./lib/jsonp')

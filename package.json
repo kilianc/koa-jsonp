@@ -4,7 +4,7 @@
   "description": "JSONP middleware with GET/POST support for koajs",
   "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony test/*.test.js --reporter spec"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,16 @@
     "json-array-stream": "^0.1.2",
     "koa": "^1.1.2",
     "koa-mount": "^1.3.0",
-    "mocha": "^2.0.1",
-    "request": "^2.47.0"
+    "mocha": "^2.3.4",
+    "mocha-standard": "^1.0.0",
+    "request": "^2.67.0",
+    "standard": "^5.4.1"
+  },
+  "standard": {
+    "globals": [
+      "before",
+      "describe",
+      "it"
+    ]
   }
 }
