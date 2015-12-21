@@ -1,4 +1,12 @@
 # koa-jsonp
+
+[![js-standard-style](https://img.shields.io/badge/Code%20Style-Standard-green.svg?style=flat-square)](https://github.com/feross/standard)
+[![Travis CI](https://img.shields.io/travis/kilianc/koa-jsonp.svg?style=flat-square)](https://travis-ci.org/kilianc/koa-jsonp)
+[![NPM version](https://img.shields.io/npm/v/koa-jsonp.svg?style=flat-square)](https://www.npmjs.com/package/koa-jsonp)
+[![NPM downloads](https://img.shields.io/npm/dm/koa-jsonp.svg?style=flat-square)](https://www.npmjs.com/package/koa-jsonp)
+[![GitHub Stars](https://img.shields.io/github/stars/kilianc/koa-jsonp.svg?style=flat-square)](https://github.com/kilianc/koa-jsonp)
+[![License](https://img.shields.io/npm/l/koa-jsonp.svg?style=flat-square)](https://www.npmjs.com/package/koa-jsonp)
+
 A [koajs](https://github.com/koajs/koa) streaming friendly JSONP middleware that supports GET/POST JSONP requests.
 
 ## Install
@@ -7,9 +15,9 @@ A [koajs](https://github.com/koajs/koa) streaming friendly JSONP middleware that
 ## Example
 
 ```js
-var db = require('nano')('http://localhost:5984/my_db')
-  , stringify = require('json-array-stream')
-  , jsonp = require('koa-jsonp')
+const db = require('nano')('http://localhost:5984/my_db')
+const stringify = require('json-array-stream')
+const jsonp = require('koa-jsonp')
 
 app.use(jsonp())
 
@@ -42,7 +50,7 @@ yield
 ## API
 
 ```js
-function jsonp(options)
+function jsonp (options)
 ```
 
 Returns the generator middleware.
@@ -119,7 +127,7 @@ function post(url, fields, callback) {
 
 koa-jsonp follows (more or less) the [Felix's Node.js Style Guide](http://nodeguide.com/style.html), your contribution must be consistent with this style.
 
-The test suite is written on top of [visionmedia/mocha](http://visionmedia.github.com/mocha/) and it took hours of hard work. Please use the tests to check if your contribution is breaking some part of the library and add new tests for each new feature.
+The test suite is written on top of [mochajs/mocha](http://mochajs.org) and it took hours of hard work. Please use the tests to check if your contribution is breaking some part of the library and add new tests for each new feature.
 
     ⚡ npm test
 
