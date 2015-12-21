@@ -4,7 +4,9 @@
   "description": "JSONP middleware with GET/POST support for koajs",
   "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "build": "babel lib --out-dir dist",
+    "prepublish": "npm run build",
+    "test": "npm run build && make test"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,11 @@
   "homepage": "https://github.com/kilianc/koa-jsonp",
   "devDependencies": {
     "JSONStream": "^1.0.7",
+    "babel": "^6.3.13",
+    "babel-cli": "^6.3.17",
+    "babel-core": "^6.3.21",
+    "babel-plugin-transform-async-to-generator": "^6.3.13",
+    "babel-preset-stage-3": "^6.3.13",
     "chai": "^3.4.1",
     "json-array-stream": "^0.1.2",
     "koa": "^2.0.0-alpha.3",
