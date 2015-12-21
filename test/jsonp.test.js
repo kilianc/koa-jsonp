@@ -6,28 +6,29 @@
 
 'use strict'
 
+const path = require('path')
+const createReadStream = require('fs').createReadStream
 const assert = require('chai').assert
 const get = require('request').defaults({ json: true }).get
 const post = require('request').defaults({ json: true }).post
 const JSONStream = require('JSONStream')
 const stringify = require('json-array-stream')
-const app = require('koa')()
+const Koa = require('koa')
 const mount = require('koa-mount')
 const jsonp = require('../')
-const path = require('path')
-const fs = require('fs')
 
 describe('jsonp()', function () {
   before(function (done) {
+    const app = new Koa()
     app.use(jsonp({ callbackName: 'my_cb_name' }))
-    app.use(mount('/buffered', function *() {
-      this.body = { foo: 'bar' }
+    app.use(mount('/buffered', async function (ctx) {
+      ctx.body = { foo: 'bar' }
     }))
-    app.use(mount('/null', function *() {
-      this.body = null
+    app.use(mount('/null', async function (ctx) {
+      ctx.body = null
     }))
-    app.use(mount('/streaming', function *() {
-      this.body = fs.createReadStream(path.join(__dirname, 'stream.json'))
+    app.use(mount('/streaming', async function (ctx) {
+      ctx.body = createReadStream(path.join(__dirname, 'stream.json'))
         .pipe(JSONStream.parse('rows.*.value'))
         .pipe(stringify())
     }))

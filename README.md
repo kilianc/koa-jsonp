@@ -10,7 +10,7 @@
 A [koajs](https://github.com/koajs/koa) streaming friendly JSONP middleware that supports GET/POST JSONP requests.
 
 ## Install
-    $ npm install koa-jsonp
+    $ npm install koa-jsonp@next
 
 ## Example
 
@@ -21,15 +21,15 @@ const jsonp = require('koa-jsonp')
 
 app.use(jsonp())
 
-app.use(mount('/users', function *() {
-  this.type = 'json'
-  this.body = db.view('koa_example', 'users')
+app.use(mount('/users', async function (ctx) {
+  ctx.type = 'json'
+  ctx.body = db.view('koa_example', 'users')
     .pipe(JSONStream.parse('rows.*.value'))
     .pipe(stringify())
 }))
 
-app.use(mount('/dow', function *() {
-  this.body = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+app.use(mount('/dow', async function (ctx) {
+  ctx.body = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 }))
 
 app.listen(8080)
@@ -53,7 +53,7 @@ yield
 function jsonp (options)
 ```
 
-Returns the generator middleware.
+Returns the koa middleware.
 
 ### Options
 * **domain** - (`String`: defaults to `'.default.lan'`) the first level domain where your API will be consumed. Used in iframe mode ([???](#cors))
