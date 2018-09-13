@@ -113,7 +113,7 @@ describe('jsonp()', function () {
     })
   })
 
-  it('should block the JSONP mode when callback is not safe', function (done) {
+  it('should block the JSONP mode when callback is not safty', function (done) {
     get('http://localhost:3000/buffered?my_cb_name=eval(alert(123));', function (err, res, body) {
       assert.equal(res.statusCode, 501)
       done(err)
