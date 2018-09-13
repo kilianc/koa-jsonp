@@ -78,6 +78,7 @@ describe('jsonp()', function () {
       var data = JSON.parse(body.match(/cb\(([^)]+)\)/m)[1])
       assert.equal(data.foo, 'bar')
       assert.equal(res.headers['content-type'], 'text/javascript; charset=utf-8')
+      assert.equal(res.headers['x-content-type-options'], 'nosniff')
       done(err)
     })
   })
@@ -88,6 +89,7 @@ describe('jsonp()', function () {
       assert.equal(data.foo, 'bar')
       assert.match(body, /<!doctype html>/)
       assert.equal(res.headers['content-type'], 'text/html; charset=utf-8')
+      assert.equal(res.headers['x-content-type-options'], 'nosniff')
       done(err)
     })
   })
@@ -107,6 +109,13 @@ describe('jsonp()', function () {
       assert.lengthOf(data, 5)
       assert.match(body, /<!doctype html>/)
       assert.equal(res.headers['content-type'], 'text/html; charset=utf-8')
+      done(err)
+    })
+  })
+
+  it('should block the JSONP mode when callback is not safe', function (done) {
+    get('http://localhost:3000/buffered?my_cb_name=eval(alert(123));', function (err, res, body) {
+      assert.equal(res.statusCode, 501)
       done(err)
     })
   })
